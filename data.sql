@@ -1,3 +1,7 @@
+DROP DATABASE IF EXISTS "goal_do_it_db";
+CREATE DATABASE "goal_do_it_db";
+\c "goal_do_it_db";
+
 DROP TABLE IF EXISTS supports;
 DROP TABLE IF EXISTS steps;
 DROP TABLE IF EXISTS goals;
