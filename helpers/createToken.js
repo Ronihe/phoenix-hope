@@ -3,11 +3,11 @@ const { SECRET } = require('../config');
 
 // return signed Json Web Token fron user data
 
-function createToken(user){
+function createToken(user) {
   let payload = {
-    username: user.username;
+    username: user.username
   };
-  return jwt.sign(payload, SECRET)
+  return jwt.sign(payload, SECRET);
 }
 
 module.exports = createToken;
