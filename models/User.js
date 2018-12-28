@@ -47,7 +47,7 @@ class User {
     );
     // need to refactor
     if (checkDuplicateUser.rows.length != 0) {
-      const err = new Err(
+      const err = new Error(
         `There already exists a user with username '${data.username}`
       );
       err.status = 409;

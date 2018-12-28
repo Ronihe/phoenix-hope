@@ -2,7 +2,7 @@
 
 const express = require('express');
 
-const APIError = require('./routes/users');
+const APIError = require('./helpers/APIErrors');
 
 const usersRoutes = require('./routes/users');
 const goalsRoutes = require('./routes/goals');
@@ -36,6 +36,6 @@ app.use(function(err, req, res, next) {
   if (!(err instanceof APIError)) {
     err = new APIError(err.status, err.message);
   }
-  return res.status(err.status).json();
+  return res.status(err.status).json(err);
 });
 module.exports = app;
