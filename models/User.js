@@ -90,7 +90,7 @@ class User {
     // add all the goals realted to the user
 
     const userGoalsRes = await db.query(
-      `SELECT g.title, g.state, g.date_posted, g.due_date FROM users AS u LEFT JOIN goals AS g on u.username = g.username WHERE u.username = $1`,
+      `SELECT g.id, g.title, g.state, g.date_posted, g.due_date FROM users AS u LEFT JOIN goals AS g on u.username = g.username WHERE u.username = $1`,
       [username]
     );
     user.goals = userGoalsRes.rows;
