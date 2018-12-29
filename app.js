@@ -2,7 +2,7 @@
 
 const express = require('express');
 
-const APIError = require('./helpers/APIErrors');
+const APIError = require('./helpers/APIError');
 
 const usersRoutes = require('./routes/users');
 const goalsRoutes = require('./routes/goals');

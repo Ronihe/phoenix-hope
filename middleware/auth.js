@@ -1,7 +1,7 @@
 /** convenience middleware to handle common auth cases in routes*/
 const jwt = require('jsonwebtoken');
 const { SECRET } = require('../config');
-const APIError = require('../helpers/APIErrors');
+const APIError = require('../helpers/APIError');
 
 /** authRequired middleware to use when the user provide a token,
  *  Add username onto req as a convenience for view function.
@@ -29,7 +29,7 @@ function ensureCorrectUser(req, res, next) {
   try {
     const tokenStr = req.body._token;
     let token = jwt.verify(tokenStr, SECRET);
-    req.username = toekn.username;
+    req.username = token.username;
     if (token.username === req.params.username) {
       return next();
     }
@@ -39,6 +39,8 @@ function ensureCorrectUser(req, res, next) {
     return next(new APIError(401, 'Unauthorized user!'));
   }
 }
+
+// logout
 
 module.exports = {
   authRequired,
