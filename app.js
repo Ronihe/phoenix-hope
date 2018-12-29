@@ -9,6 +9,7 @@ const goalsRoutes = require('./routes/goals');
 const stepsRoutes = require('./routes/steps');
 const authRoutes = require('./routes/auth');
 const path = require('path');
+const cors = require('cors');
 
 /* add logging system */
 const morgan = require('morgan');
@@ -16,7 +17,7 @@ const morgan = require('morgan');
 const app = express();
 //middlewares
 app.use(express.json());
-
+app.use(cors());
 app.use(morgan('tiny'));
 
 app.use('/goals', goalsRoutes);

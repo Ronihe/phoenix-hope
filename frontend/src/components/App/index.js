@@ -1,24 +1,28 @@
 import React, { Component } from 'react';
-import './App.css';
+import { Provider } from 'react-redux';
+import { configureStore } from '../../store';
+import { stayLoggedIn } from '../../store/actions/auth';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Landing from '../Landing';
+import './style.css';
+
+const store = configureStore();
 
 class App extends Component {
+  componentDidMount() {
+    // basic check for the token in localStorage
+    store.dispatch(stayLoggedIn());
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <p>
-            Edit <code>src/index.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Provider store={store}>
+        <Router>
+          <div>
+            <Landing />
+          </div>
+        </Router>
+      </Provider>
     );
   }
 }
