@@ -10,7 +10,7 @@ const router = new express.Router();
 
 // you logged in and can see all the other people's goal
 /** GET / => {users: [user, ...]} */
-router.get('/', authRequired, async function(req, res, next) {
+router.post('/', authRequired, async function(req, res, next) {
   try {
     const users = await User.finaAll();
     return res.json({ users });
@@ -21,8 +21,9 @@ router.get('/', authRequired, async function(req, res, next) {
 
 /** GET /[username] => {user: user} */
 //as a user, logged in you can see other people's profile
-router.get('/:username', authRequired, async function(req, res, next) {
+router.post('/:username', authRequired, async function(req, res, next) {
   try {
+    console.log(req.params.username);
     const user = await User.findOne(req.params.username);
     return res.json({ user });
   } catch (error) {

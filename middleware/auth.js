@@ -11,9 +11,12 @@ const APIError = require('../helpers/APIError');
 
 function authRequired(req, res, next) {
   try {
+    console.log(req.body);
     const tokenStr = req.body._token;
     const token = jwt.verify(tokenStr, SECRET);
     req.username = token.username;
+    console.log(req.username);
+    return next();
   } catch (err) {
     return next(new APIError(401, 'You must authenticate first'));
   }
