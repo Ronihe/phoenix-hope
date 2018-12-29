@@ -57,9 +57,9 @@ VALUES
 
 CREATE TABLE supports
 (
-    id SERIAL PRIMARY KEY,
     goal_id INTEGER NOT NULL REFERENCES goals ON DELETE CASCADE,
-    supporter_username TEXT NOT NULL REFERENCES users ON DELETE CASCADE
+    supporter_username TEXT NOT NULL REFERENCES users ON DELETE CASCADE,
+    PRIMARY KEY (goal_id, supporter_username)
 );
 INSERT INTO supports
     (goal_id, supporter_username)

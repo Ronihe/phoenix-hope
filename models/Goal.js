@@ -84,6 +84,29 @@ class Goal {
   }
 
   // get a clap
+  // static async clap
+
+  // support a goal
+  static async support(goal_id, username) {
+    //check if the goal_id exists
+    await Goal.getOneById(goal_id);
+    //check if the match already exists
+    const supportRes = await db.query(
+      `SELECT supporter_username FROM supports WHERE goal_id = ${goal_id}`
+    );
+    console.log(supportRes.rows[0].username, username);
+    if (supportRes.rows[0].username === username) {
+      throw new APIError(
+        409,
+        `user ${username} already supported this goal ${goal_id}`
+      );
+    }
+    const result = await db.query(
+      `INSERT INTO supports (goal_id, supporter_username) VALUES ($1, $2) RETURNING *`,
+      [goal_id, username]
+    );
+    return result.rows[0];
+  }
 }
 
 module.exports = Goal;

@@ -5,6 +5,8 @@ const express = require('express');
 const router = new express.Router();
 const APIError = require('../helpers/APIError');
 const { authRequired, ensureCorrectUser } = require('../middleware/auth');
+const jwt = require('jsonwebtoken');
+const { SECRET } = require('../config');
 
 //get all the goals
 router.get(`/`, async function(req, res, next) {
@@ -13,6 +15,20 @@ router.get(`/`, async function(req, res, next) {
     return res.json({ goals });
   } catch (error) {
     return next(erro);
+  }
+});
+// support a goal
+
+router.post('/:id/support', authRequired, async function(req, res, next) {
+  try {
+    console.log('am I here');
+    const tokenStr = req.body._token;
+    const token = jwt.verify(tokenStr, SECRET);
+    const username = token.username;
+    const newSupport = await Goal.support(req.params.id, username);
+    return res.status(201).json({ newSupport });
+  } catch (error) {
+    return next(error);
   }
 });
 
@@ -88,5 +104,15 @@ router.post('/:username/:id/complete', ensureCorrectUser, async function(
     return next(error);
   }
 });
+
+//get a clap
+
+// router.post('/:id/clap', authRequired, async function(req, res, next) {
+//   try {
+
+//   } catch (error) {
+//     return next(error);
+//   }
+// });
 
 module.exports = router;
