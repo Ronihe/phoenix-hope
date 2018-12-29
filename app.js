@@ -9,7 +9,10 @@ const goalsRoutes = require('./routes/goals');
 const stepsRoutes = require('./routes/steps');
 const authRoutes = require('./routes/auth');
 const path = require('path');
+<<<<<<< HEAD
 const cors = require('cors');
+=======
+>>>>>>> c37410d8a0b83e54bdc524b4f5b6c7439d07d281
 
 /* add logging system */
 const morgan = require('morgan');
