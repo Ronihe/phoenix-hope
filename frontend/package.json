@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-<<<<<<< HEAD
     "axios": "^0.18.0",
     "formik": "^1.4.1",
     "jwt-decode": "^2.2.0",
@@ -16,12 +15,6 @@
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "uuid": "^3.3.2"
-=======
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0",
-    "react-router-dom": "^4.3.1",
-    "react-scripts": "2.1.2"
->>>>>>> c37410d8a0b83e54bdc524b4f5b6c7439d07d281
   },
   "scripts": {
     "start": "react-scripts start",
