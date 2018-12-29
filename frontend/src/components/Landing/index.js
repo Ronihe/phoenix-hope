@@ -4,6 +4,7 @@ import Login from '../../containers/LoginContainer';
 import Signup from '../../containers/Signup';
 import NoAuthRoute from '../../containers/NoAuthRoute';
 import ProtectedRoute from '../../containers/ProtectedRoute';
+import Homepage from '../../containers/Homepage';
 
 class Landing extends Component {
   state = {};
@@ -15,7 +16,7 @@ class Landing extends Component {
           <NoAuthRoute exact path="/login" component={Login} />
           <NoAuthRoute exact path="/signup" component={Signup} />
           {/* ProtectedRoutes only let you go to them if you are authenticated */}
-          <ProtectedRoute path="/" component={Login} />
+          <ProtectedRoute path="/" component={Homepage} />
         </Switch>
       </div>
     );
