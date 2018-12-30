@@ -8,21 +8,22 @@ const usersRoutes = require('./routes/users');
 const goalsRoutes = require('./routes/goals');
 const stepsRoutes = require('./routes/steps');
 const authRoutes = require('./routes/auth');
+const path = require('path');
+const cors = require('cors');
 
 /* add logging system */
 const morgan = require('morgan');
 
 const app = express();
-
 //middlewares
 app.use(express.json());
-
+app.use(cors());
 app.use(morgan('tiny'));
 
 app.use('/goals', goalsRoutes);
 app.use('/steps', stepsRoutes);
 app.use('/users', usersRoutes);
-app.use('/', authRoutes);
+app.use('/auth', authRoutes);
 
 /* 404 error handler */
 app.get('*', function(req, res, next) {

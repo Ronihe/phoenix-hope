@@ -1,0 +1,151 @@
+.Header {
+  background-color: #1c313a;
+  height: 5.5rem;
+  display: flex;
+  align-items: center;
+  margin: 0 0;
+  width: 100%;
+}
+
+.Header-logo {
+  background-color: #00695c;
+  color: white;
+  font-size: 1.625rem;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+  width: 3.75rem;
+  height: 2.5rem;
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 1.5rem;
+}
+
+.Header-logo:hover {
+  background-color: #48a999;
+}
+
+.search-form {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  margin-right: 1.5rem;
+}
+
+.search {
+  height: 29px;
+  border: 1px solid #7a7a7a;
+  border-radius: 2px;
+  background-color: #fff;
+  display: flex;
+  flex: 1;
+  align-items: center;
+}
+
+.search input {
+  border: none;
+  height: 100%;
+  font-size: 0.875rem;
+  border-radius: 2px;
+  flex: 1;
+  padding: 0;
+}
+
+.search span {
+  margin: 0 0.25rem;
+}
+
+.search-categories {
+  margin: 0 1.5rem;
+}
+
+.search-categories input {
+  margin: 0 0.5rem;
+}
+
+.search-categories label {
+  color: white;
+  text-transform: capitalize;
+}
+
+.search-btn {
+  background-color: #00695c;
+  color: white;
+  font-size: 0.875rem;
+  border: none;
+  padding: 5px 12px;
+  border-radius: 2px;
+}
+
+.search-btn:hover {
+  cursor: pointer;
+  background-color: #48a999;
+}
+
+.search-btn:active,
+.search-btn:focus {
+  outline: none;
+}
+
+.profile-area {
+  width: 7rem;
+  background-color: #718792;
+  height: 100%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-area img {
+  width: 50%;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: block;
+  text-align: center;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  /* margin-top: 0.2em; */
+  position: absolute;
+  background-color: #f9f9f9;
+  width: 100%;
+  /* min-width: 160px; */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 0.6em 0.2em;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #48a999;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+
+.profile-img {
+  border-radius: 5px;
+}
