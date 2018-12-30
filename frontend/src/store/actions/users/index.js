@@ -43,14 +43,12 @@ export function fetchCurrentUser() {
       let token = getToken();
       let decoded = jwtDecode(token);
       let currentUser = await callAPI(
-        'GET',
+        'POST',
         `/users/${decoded.username}`,
-        true
+        true,
+        { _token: token }
       );
-      currentUser.first_name =
-        currentUser.first_name[0].toUpperCase() +
-        currentUser.first_name.slice(1).toLowerCase();
-      dispatch(fetchCurrentUserSuccess(currentUser));
+      dispatch(fetchCurrentUserSuccess(currentUser.user));
     } catch (error) {
       dispatch(fetchCurrentUserFail(error));
       return Promise.reject();

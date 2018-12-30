@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
-import { CollectionsPage } from '../../components/GoalForm';
+import { GoalForm } from '../../components/GoalForm';
 import { authRequest } from '../../store/actions/auth';
 import { setError, clearError } from '../../store/actions/error';
+import { createGoalRequest } from '../../store/actions/goals';
 
 function mapStateToProps(reduxState) {
   return {
@@ -10,5 +11,5 @@ function mapStateToProps(reduxState) {
 }
 export default connect(
   mapStateToProps,
-  { authRequest, setError, clearError }
-)(CollectionsPage);
+  { authRequest, setError, clearError, createGoalRequest }
+)(GoalForm);

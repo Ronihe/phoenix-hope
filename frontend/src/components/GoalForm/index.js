@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, Form, Input, Radio } from 'antd';
+import { Button, Modal, Form, Input, DatePicker } from 'antd';
 
 export const CollectionCreateForm = Form.create()(
   // eslint-disable-next-line
@@ -7,6 +7,11 @@ export const CollectionCreateForm = Form.create()(
     render() {
       const { visible, onCancel, onCreate, form } = this.props;
       const { getFieldDecorator } = form;
+      const config = {
+        rules: [
+          { type: 'object', required: true, message: 'Please select time!' }
+        ]
+      };
       return (
         <Modal
           visible={visible}
@@ -29,6 +34,9 @@ export const CollectionCreateForm = Form.create()(
             <Form.Item label="Description">
               {getFieldDecorator('description')(<Input type="textarea" />)}
             </Form.Item>
+            <Form.Item label="Due Date">
+              {getFieldDecorator('due_date', config)(<DatePicker />)}
+            </Form.Item>
           </Form>
         </Modal>
       );
@@ -36,7 +44,7 @@ export const CollectionCreateForm = Form.create()(
   }
 );
 
-export class CollectionsPage extends React.Component {
+export class GoalForm extends React.Component {
   state = {
     visible: false
   };
@@ -49,14 +57,14 @@ export class CollectionsPage extends React.Component {
     this.setState({ visible: false });
   };
 
-  handleCreate = () => {
+  handleCreate = async () => {
     const form = this.formRef.props.form;
-    form.validateFields((err, values) => {
+    form.validateFields(async (err, values) => {
       if (err) {
         return;
       }
-
-      console.log('Received values of form: ', values);
+      const payload = { ...values, due_date: values.due_date._d };
+      await this.props.createGoalRequest(payload);
       form.resetFields();
       this.setState({ visible: false });
     });

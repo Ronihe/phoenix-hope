@@ -1,26 +1,32 @@
 import * as t from '../actionTypes';
 import { callAPI } from '../../../services/api';
+import jwtDecode from 'jwt-decode';
+import { getToken } from '../../../services/token';
 
-export function fetchGoalsRequest() {
+export function createGoalRequest(payload) {
   return async dispatch => {
     try {
-      // tell everyone we're making the request
-      dispatch({ type: t.FETCH_GOALS_REQUEST });
-      // call the API for /jobs, auth required
-      let jobs = await callAPI('get', '/goals', true);
+      dispatch({ type: t.CREATE_GOAL_REQUEST });
+      let token = getToken();
+      let decoded = jwtDecode(token);
+      let goal = await callAPI('post', `/goals/${decoded.username}`, true, {
+        ...payload,
+        _token: token
+      });
       // dispatch the success action creator and the jobs that we got back
-      dispatch(fetchJobsSuccess(jobs));
+      console.log(goal);
+      dispatch(createGoalSuccess(goal));
     } catch (error) {
-      dispatch(fetchJobsFail(error));
+      dispatch(createGoalFail(error));
       return Promise.reject();
     }
   };
 }
 
-export function fetchJobsSuccess(jobs) {
-  return { type: t.FETCH_JOBS_SUCCESS, jobs };
+export function createGoalSuccess(goal) {
+  return { type: t.CREATE_GOAL_SUCCESS, goal: goal.goal };
 }
 
-export function fetchJobsFail(error) {
-  return { type: t.FETCH_JOBS_FAIL, error };
+export function createGoalFail(error) {
+  return { type: t.CREATE_GOAL_FAIL, error };
 }
