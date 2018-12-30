@@ -1,13 +1,13 @@
 import { combineReducers } from 'redux';
 import auth from './auth';
 import currentUser from './currentUser';
+import goals from './goals';
 import error from './error';
-import jobs from './jobs';
 
 const rootReducer = combineReducers({
   auth,
   currentUser,
-  jobs,
+  goals,
   error
 });
 

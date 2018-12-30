@@ -56,10 +56,10 @@ async function seedData() {
   INSERT INTO goals (username, title, description, category, due_date) VALUES
   ('test', 'deploy this app', 'you can make it', 'coding', '2018-12-22');
 
-  INSERT steps (goal_id, step_content) VALUES
+  INSERT INTO steps (goal_id, step_content) VALUES
   (1, 'deploy this app, day1');
 
-  INSERT INTO INTO supports (goal_id, supporter_username) VALUES 
+  INSERT INTO  supports (goal_id, supporter_username) VALUES 
   (1, 'roni');
   `);
   } catch (err) {

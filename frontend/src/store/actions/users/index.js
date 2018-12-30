@@ -66,29 +66,6 @@ export function fetchCurrentUserFail(error) {
   return { type: t.FETCH_CURRENT_USER_FAIL, error };
 }
 
-export function applyJob(job_id) {
-  return async dispatch => {
-    try {
-      dispatch({ type: t.APPLY_JOB_REQUEST });
-
-      await callAPI('POST', `/jobs/${job_id}/applications`, true);
-
-      dispatch(applyJobSuccess(job_id));
-    } catch (error) {
-      dispatch(fetchCurrentUserFail(error));
-      return Promise.reject();
-    }
-  };
-}
-
-export function applyJobSuccess(job_id) {
-  return { type: t.APPLY_JOB_SUCCESS, job_id };
-}
-
-export function applyJobFail(error) {
-  return { type: t.APPLY_JOB_FAIL, error };
-}
-
 export function updateCurrentUser(user) {
   return async dispatch => {
     try {

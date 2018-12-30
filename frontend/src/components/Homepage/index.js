@@ -1,28 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Switch, Redirect } from 'react-router-dom';
-import './style.css';
-
+import { Redirect } from 'react-router-dom';
+import 'antd/dist/antd.css';
+import CollectionsPage from '../../containers/GoalFormContainer';
+import { Row, Col } from 'antd';
 export default class Homepage extends Component {
   state = { loading: true, redirect: false };
 
-  async componentDidMount() {
-    await this.props.fetchCurrentUser();
-    await this.props.fetchJobsRequest();
-    this.setState({ loading: false });
-  }
-
   render() {
-    const { jobs } = this.props;
-
     if (this.state.redirect) {
       return <Redirect to="/login" />;
     }
 
     return (
-      <div>
-        <h1>Hey</h1>
-      </div>
+      <Row type="flex" justify="center">
+        <Col>
+          <CollectionsPage />
+        </Col>
+      </Row>
     );
   }
 }

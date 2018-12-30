@@ -34,41 +34,6 @@ export default function errorReducer(state = DEFAULT_STATE, action) {
         title: 'There was a problem loading this user profile.',
         message: action.error.message
       };
-    case t.FETCH_JOBS_FAIL:
-      return {
-        ...state,
-        hasError: true,
-        title: 'Unable to load jobs.',
-        message: action.error.message
-      };
-    case t.FETCH_USERS_SEARCH_FAIL:
-      return {
-        ...state,
-        hasError: true,
-        title: 'Unable to search users.',
-        message: action.error.message
-      };
-    case t.FETCH_COMPANIES_SEARCH_FAIL:
-      return {
-        ...state,
-        hasError: true,
-        title: 'Unable to search companies.',
-        message: action.error.message
-      };
-    case t.FETCH_JOBS_SEARCH_FAIL:
-      return {
-        ...state,
-        hasError: true,
-        title: 'Unable to search jobs.',
-        message: action.error.message
-      };
-    case t.APPLY_JOB_FAIL:
-      return {
-        ...state,
-        hasError: true,
-        title: 'Unable to apply jobs.',
-        message: action.error.message
-      };
     case t.UPDATE_CURRENT_USER_FAIL:
       return {
         ...state,
