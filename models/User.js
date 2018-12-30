@@ -69,7 +69,7 @@ class User {
   }
 
   //find all users
-  static async finaAll() {
+  static async findAll() {
     const result = await db.query(
       `SELECT username, first_name, last_name FROM users ORDER BY username`
     );

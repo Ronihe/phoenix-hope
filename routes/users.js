@@ -12,7 +12,7 @@ const router = new express.Router();
 /** GET / => {users: [user, ...]} */
 router.post('/', authRequired, async function(req, res, next) {
   try {
-    const users = await User.finaAll();
+    const users = await User.findAll();
     return res.json({ users });
   } catch (error) {
     return next(error);
