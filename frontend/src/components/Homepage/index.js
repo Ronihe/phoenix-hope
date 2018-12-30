@@ -7,7 +7,7 @@ import Goals from '../Goals';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  background-color: lightgrey;
+  background-color: pink;
   padding: 4rem;
   margin: 2rem;
 `;

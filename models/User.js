@@ -79,7 +79,7 @@ class User {
   // find one user and its realted goals
   static async findOne(username) {
     const result = await db.query(
-      `SELECT username, first_name, last_name FROM users WHERE username = $1`,
+      `SELECT username, first_name, last_name, phone FROM users WHERE username = $1`,
       [username]
     );
 

@@ -8,6 +8,7 @@ const usersRoutes = require('./routes/users');
 const goalsRoutes = require('./routes/goals');
 const stepsRoutes = require('./routes/steps');
 const authRoutes = require('./routes/auth');
+const twilioRoutes = require('./routes/twilio');
 const path = require('path');
 const cors = require('cors');
 
@@ -24,6 +25,7 @@ app.use('/goals', goalsRoutes);
 app.use('/steps', stepsRoutes);
 app.use('/users', usersRoutes);
 app.use('/auth', authRoutes);
+app.use('/twilio', twilioRoutes);
 
 /* 404 error handler */
 app.get('*', function(req, res, next) {

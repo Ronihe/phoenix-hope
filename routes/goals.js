@@ -21,7 +21,6 @@ router.get(`/`, async function(req, res, next) {
 
 router.post('/:id/support', authRequired, async function(req, res, next) {
   try {
-    console.log('am I here');
     const tokenStr = req.body._token;
     const token = jwt.verify(tokenStr, SECRET);
     const username = token.username;

@@ -3,6 +3,8 @@ const db = require('../db');
 const APIError = require('../helpers/APIError');
 const sqlPartialUpdate = require('../helpers/partialUpdateSql');
 const { TWILIO } = require('../config');
+const bt = require('big-time');
+const lt = require('long-timeout');
 // const Goal = require('./Goal');
 
 const accountSid = TWILIO.accountSid;
@@ -10,11 +12,11 @@ const authToken = TWILIO.authToken;
 const client = require('twilio')(accountSid, authToken);
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
 const sendingNum = TWILIO.sendingNumber;
-const receivingNum = TWILIO.receivingNumber;
 
 class Twilio {
   //send a message
-  static async sendMsg(msg) {
+  static async sendMsg(msg, phone) {
+    const receivingNum = '+1' + phone;
     const message = await client.messages.create({
       body: msg,
       to: receivingNum,
@@ -25,25 +27,25 @@ class Twilio {
   }
 
   // send a message before the due date, should it be async func?
-  static sendDueMsg(msg, hours) {
+  static sendDueMsg(msg, hours, phone) {
     // 24 hours before the due day
-    setTimeout(async () => {
-      await Twilio.sendMsg(msg);
+
+    bt.setTimeout(async () => {
+      await Twilio.sendMsg(msg, phone);
     }, hours * 3600 * 1000);
     return `${msg} will be sendt in ${hours} hours`;
   }
 
-  // send interval reminder
-  // static setDailyReminder(msg, hours) {
-  //   //set reminder
-  //   const dailyReminder = setInterval(async () => {
-  //     await Twilio.sendMsg(msg);
-  //   }, 24 * 3600 * 1000);
-  //   //stops duedate
-  //   setTimeout(() => {
-  //     clearInterval(dailyReminder);
-  //   }, hours * 3600 * 1000);
-  // }
+  //send interval reminder
+  static setDailyReminder(msg, hours, phone) {
+    const dailyReminder = lt.setInterval(() => {
+      Twilio.sendMsg(msg, phone);
+    }, 24 * 3600 * 1000);
+    //stops duedate
+    bt.setTimeout(() => {
+      lt.clearInterval(dailyReminder);
+    }, hours * 3600 * 1000);
+  }
   // static async:
 
   //return your goals, use the goals in the goals method

@@ -3,6 +3,7 @@ const db = require('../db');
 const APIError = require('../helpers/APIError');
 const sqlPartialUpdate = require('../helpers/partialUpdateSql');
 const User = require('./User');
+const Twilio = require('../models/Twilio');
 
 class Goal {
   // get all the goals
@@ -17,13 +18,35 @@ class Goal {
 
   static async create(username, data) {
     // check if the user exists
-    await User.findOne(username);
+    const user = await User.findOne(username);
+    const phone = user.phone;
 
     const result = await db.query(
       `INSERT INTO goals (username, title, description, due_date, category) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
       [username, data.title, data.description, data.due_date, data.category]
     );
-    return result.rows[0];
+    const newGoal = result.rows[0];
+
+    // notify the user that their due is approaching the next day
+    const hours = (newGoal.due_date - newGoal.date_posted) / 3600000 - 24;
+    await Twilio.sendMsg(
+      `Congrats!, ${username}! you created a new goal ${newGoal.title}!`,
+      phone
+    );
+    await Twilio.setDailyReminder(
+      `Don't forget your ${newGoal.title}, keep the hardwork!`,
+      hours,
+      phone
+    );
+    await Twilio.sendDueMsg(
+      `Your ${newGoal.title} is due on ${
+        newGoal.due_date
+      }. Did you complete it? Hurry Up!`,
+      hours,
+      phone
+    );
+
+    return newGoal;
   }
 
   // get one goal by goal id with its related steps
@@ -50,7 +73,7 @@ class Goal {
     }
 
     const goalStepRes = await db.query(
-      `SELECT s.id, s.goal_id, s.step_content, s.date_posted, g.state 
+      `SELECT s.id, s.goal_id, s.step_content, s.date_posted 
       FROM steps AS s
         JOIN goals AS g ON g.id = s.goal_id
       WHERE g.id = $1`,
@@ -79,8 +102,20 @@ class Goal {
   // complete a goal
   static async complete(username, id) {
     // check the if the id exists and belongs to the user
-    await Goal.getOneByUsernameAndId(username, id);
-    await db.query(`UPDATE goals SET state = 'completed' WHERE id = ${id}`);
+    const goal = await Goal.getOneByUsernameAndId(username, id);
+    if (goal.state === 'completed') {
+      throw new APIError(409, 'This is goal is already completed.');
+    }
+    const user = await User.findOne(username);
+    const phone = user.phone;
+    const completedGoalRes = await db.query(
+      `UPDATE goals SET state = 'completed' WHERE id = ${id} returning *`
+    );
+    const completedGoal = completedGoalRes.rows[0];
+    await Twilio.sendMsg(
+      `Congrats!, ${username}! you completed ${completedGoal.title}!`,
+      phone
+    );
   }
 
   // get a clap
