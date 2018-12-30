@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS "goals";
-CREATE DATABASE "goals";
-\c "goals";
+-- DROP DATABASE IF EXISTS "goals";
+-- CREATE DATABASE "goals";
+-- \c "goals";
 
 DROP TABLE IF EXISTS supports;
 DROP TABLE IF EXISTS steps;
@@ -18,13 +18,6 @@ CREATE TABLE users
     photo_url TEXT
 );
 
-INSERT INTO users
-    (username, password, first_name, last_name, email, phone)
-VALUES
-    ('roni', '123456', 'roni', 'h', 'rh@abc.com', '+12675373543'),
-    ('jason', '123456', 'jason', 'h', 'gh@abc.com', '+5342683984');
-
-
 CREATE TABLE goals
 (
     id SERIAL PRIMARY KEY,
@@ -38,11 +31,6 @@ CREATE TABLE goals
     claps INTEGER DEFAULT 0
 );
 
-INSERT INTO goals
-    (username, title, description, category, due_date)
-VALUES
-    ('roni', 'deploy this app', 'you can make it', 'coding', '2018-12-22');
-
 CREATE TABLE steps
 (
     id SERIAL PRIMARY KEY,
@@ -50,10 +38,6 @@ CREATE TABLE steps
     step_content TEXT,
     date_posted date DEFAULT CURRENT_DATE NOT NULL
 );
-INSERT INTO steps
-    (goal_id, step_content)
-VALUES
-    (1, 'deploy this app, day1');
 
 CREATE TABLE supports
 (
@@ -61,8 +45,3 @@ CREATE TABLE supports
     supporter_username TEXT NOT NULL REFERENCES users ON DELETE CASCADE,
     PRIMARY KEY (goal_id, supporter_username)
 );
-INSERT INTO supports
-    (goal_id, supporter_username)
-VALUES
-    (1, 'roni');
-
