@@ -64,13 +64,8 @@ async function seedData() {
   INSERT INTO steps (goal_id, step_content) VALUES
   (1, 'deploy this app, day1');
 
-<<<<<<< HEAD
-  INSERT INTO  supports (goal_id, supporter_username) VALUES 
-  (1, 'roni');
-=======
   INSERT INTO supports (goal_id, supporter_username) VALUES 
   (1, 'test');
->>>>>>> master
   `);
   } catch (err) {
     console.log('Something went wrong!');
