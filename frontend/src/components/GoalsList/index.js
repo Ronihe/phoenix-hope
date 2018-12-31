@@ -3,27 +3,42 @@ import { Collapse, Button } from 'antd';
 import uuid from 'uuid/v4';
 import moment from 'moment';
 import EditGoalForm from '../../containers/EditGoalContainer';
-const Panel = Collapse.Panel;
+import styled from 'styled-components';
+import DeleteGoalButton from '../../containers/DeleteButtonContainer';
 
-class Goals extends Component {
+const Panel = Collapse.Panel;
+const Div = styled.div`
+  display: flex;
+  margin: ${props => props.margin || '0'};
+`;
+
+class GoalsList extends Component {
   state = {};
 
   render() {
-    return (
+    const { goals } = this.props;
+    return goals.length ? (
       <Collapse>
-        {this.props.goals.map(goal => {
+        {goals.map(goal => {
           return (
             <Panel header={`Goal: ${goal.title}`} key={uuid()}>
               <p>Description: {goal.description}</p>
               <p>Date: {moment(goal.due_date).format('MM/DD/YYYY')}</p>
               <p>Due: {moment(goal.due_date).fromNow()}</p>
-              <EditGoalForm goal={goal} />
+              <Div>
+                <EditGoalForm goal={goal} />
+                <Div margin="0 1rem">
+                  <DeleteGoalButton id={goal.id} />
+                </Div>
+              </Div>
             </Panel>
           );
         })}
       </Collapse>
+    ) : (
+      <div />
     );
   }
 }
 
-export default Goals;
+export default GoalsList;

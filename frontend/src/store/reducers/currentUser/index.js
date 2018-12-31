@@ -30,6 +30,11 @@ export default function currentUser(state = DEFAULT_STATE, action) {
           }
         })
       };
+    case t.DELETE_GOAL_SUCCESS:
+      return {
+        ...state,
+        goals: state.goals.filter((goal, idx) => goal.id !== action.id)
+      };
     default:
       return state;
   }

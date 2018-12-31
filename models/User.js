@@ -113,20 +113,24 @@ class User {
       `SELECT g.id, g.title, g.description, g.state, g.date_posted, g.due_date FROM users AS u LEFT JOIN goals AS g on u.username = g.username WHERE u.username = $1`,
       [username]
     );
-    user.goals = userGoalsRes.rows;
+    if (userGoalsRes.rows[0].id === null) {
+      user.goals = [];
+    } else {
+      user.goals = userGoalsRes.rows;
 
-    for (let goal of user.goals) {
-      const goalStepRes = await db.query(
-        `SELECT s.id, s.goal_id, s.step_content, s.date_posted 
+      for (let goal of user.goals) {
+        const goalStepRes = await db.query(
+          `SELECT s.id, s.goal_id, s.step_content, s.date_posted 
         FROM steps AS s
           JOIN goals AS g ON g.id = s.goal_id
         WHERE g.id = $1`,
-        [goal.id]
-      );
-      goal.steps = goalStepRes.rows;
-    }
+          [goal.id]
+        );
+        goal.steps = goalStepRes.rows;
+      }
 
-    return user;
+      return user;
+    }
   }
 
   //update a user;

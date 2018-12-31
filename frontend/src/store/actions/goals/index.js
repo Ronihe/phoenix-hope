@@ -61,3 +61,35 @@ export function editGoalSuccess(goal) {
 export function editGoalFail(error) {
   return { type: t.EDIT_GOAL_FAIL, error };
 }
+
+export function deleteGoalRequest(id) {
+  return async dispatch => {
+    try {
+      dispatch({ type: t.DELETE_GOAL_REQUEST });
+      let token = getToken();
+      let decoded = jwtDecode(token);
+      let goal = await callAPI(
+        'delete',
+        `/goals/${decoded.username}/${id}`,
+        true,
+        {
+          _token: token
+        }
+      );
+      // dispatch the success action creator and the jobs that we got back
+      dispatch(deleteGoalSuccess(id));
+    } catch (error) {
+      console.log(error);
+      dispatch(deleteGoalFail(error));
+      return Promise.reject();
+    }
+  };
+}
+
+export function deleteGoalSuccess(id) {
+  return { type: t.DELETE_GOAL_SUCCESS, id: id };
+}
+
+export function deleteGoalFail(error) {
+  return { type: t.DELETE_GOAL_FAIL };
+}

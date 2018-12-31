@@ -87,7 +87,7 @@ export class EditGoalForm extends React.Component {
     return (
       <div>
         <Button
-          type="primary"
+          type="default"
           onClick={this.showModal}
           shape="circle"
           icon="edit"
