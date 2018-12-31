@@ -118,18 +118,19 @@ class User {
     } else {
       user.goals = userGoalsRes.rows;
 
-    for (let goal of user.goals) {
-      const goalStepRes = await db.query(
-        `SELECT s.id, s.goal_id, s.step_content, s.date_posted 
+      for (let goal of user.goals) {
+        const goalStepRes = await db.query(
+          `SELECT s.id, s.goal_id, s.step_content, s.date_posted 
         FROM steps AS s
           JOIN goals AS g ON g.id = s.goal_id
         WHERE g.id = $1`,
-        [goal.id]
-      );
-      goal.steps = goalStepRes.rows;
-    }
+          [goal.id]
+        );
+        goal.steps = goalStepRes.rows;
+      }
 
-    return user;
+      return user;
+    }
   }
 
   //update a user;
