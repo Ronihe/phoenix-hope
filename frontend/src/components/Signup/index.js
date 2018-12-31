@@ -10,7 +10,8 @@ const DEFAULT_STATE = {
   last_name: '',
   email: '',
   photo: '',
-  current_company: ''
+  current_company: '',
+  phone: '2672553439'
 };
 
 export default class Signup extends Component {
@@ -107,12 +108,12 @@ export default class Signup extends Component {
             </li>
 
             <li className="signup-form-row">
-              <label htmlFor="photo">Photo</label>
+              <label htmlFor="photo">Phone Number</label>
               <input
                 type="text"
-                name="photo"
+                name="receivingNum"
                 onChange={this.handleChange}
-                value={this.state.photo}
+                value={this.state.phone}
               />
             </li>
             {/* 

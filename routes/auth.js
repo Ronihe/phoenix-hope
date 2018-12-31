@@ -23,10 +23,9 @@ router.post('/register', async function(req, res, next) {
     const user = await User.register(req.body);
     const token = createToken(user);
     const phone = req.body.phone;
-    await Twilio.sendMsg(
-      'Goal do it! Welcome to our big family!',
-      receivingNum
-    );
+    console.log(req.body);
+    console.log(phone);
+    await Twilio.sendMsg('Goal do it! Welcome to our big family!', phone);
     return res.json({ token });
   } catch (error) {
     console.log(error);
