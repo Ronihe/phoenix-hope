@@ -15,8 +15,7 @@ router.post('/', async (req, res, next) => {
   // const tokenStr = req.body._token;
   // const token = jwt.verify(tokenStr, SECRET);
   // const username = token.username;
-  console.log(req);
-  const user = await User.findOne('test15');
+  const user = await User.findOne(TWILIO.username);
   const goals = user.goals;
 
   let goalsStr = '';
@@ -27,6 +26,9 @@ router.post('/', async (req, res, next) => {
     }
   });
 
+  // if (!goalsStr) {
+  //   goalsStr = 'You dont have any goals. Set one goal now!';
+  // }
   const twiml = new MessagingResponse();
   twiml.message(goalsStr);
   //twiml.message('test');
