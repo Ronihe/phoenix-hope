@@ -16,7 +16,7 @@
 
 #### break it down to small steps/goals and achieve one small goal at one time.
 
-#### Perfection is unattainable. This app will send you the auto daily reminder of your goal automatically with Twilio API, and
+#### Perfection is unattainable. This app will send you the auto daily text reminder and of your goal automatically with Twilio API, and when the due date of your goal is approaching.
 
 #### Get the support from your community. Your created goals will be supported/claps from other users and some comments from other users.
 
@@ -27,6 +27,30 @@
 ---
 
 ## Backend Design
+
+> ### Auth API for Authenication
+>
+> > `POST /auth/login` &nbsp; &nbsp; Login to your account and request an API Auth Token
+> >
+> > `POST /auth/register` &nbsp; &nbsp; Create a new account and request an API Auth Token
+>
+> ### Users API for managing users
+>
+> > `POST /users` &nbsp; &nbsp; Logged in and you can get all the users in the system
+> >
+> > `POST /users/:username` &nbsp; &nbsp; Logged in and you can see other user's profile and goals
+> >
+> > `PATCH /users/:username` &nbsp; &nbsp; Logged in and only the user him/herself can change his/her profile info
+> >
+> > `DELETE /users/:username` &nbsp; &nbsp; Logged in and only the user him/herself can delete his/her account
+>
+> ### Goals
+>
+> > ``
+>
+> ### Steps
+
+### Twilio
 
 ---
 

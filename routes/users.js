@@ -8,7 +8,7 @@ const APIError = require('../helpers/APIError');
 
 const router = new express.Router();
 
-// you logged in and can see all the other people's goal
+// you logged in and can see all the users
 /** GET / => {users: [user, ...]} */
 router.post('/', authRequired, async function(req, res, next) {
   try {
