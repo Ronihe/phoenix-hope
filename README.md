@@ -1,6 +1,6 @@
 # phoenix-hope
 
-#### Welcome to Goal do it!
+#### Welcome to Goal do it! This web application is still in process.
 
 #### 2019 is coming. You must already have a list of the New Year's Resolutions. Have you ever experienced the post new year slump, and cannot keep your resolutions until the next new year comes?
 
