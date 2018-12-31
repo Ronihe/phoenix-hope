@@ -24,6 +24,18 @@
 
 ## How to use this application
 
+### dev prerequisites
+
+- node v10.14.2
+- npm v6.4.1
+- postgres v10.5
+
+### terminal command
+
+- npm install - install deps
+- createdb goals - create the database
+- node seed.js - create tables and inssert some sample data
+
 ### Setup a Twilio account
 
 #### If you haven't already, sign up for an account at [twilio.com](https://www.twilio.com/)
@@ -36,6 +48,7 @@
   TWILIO_ACCOUNT_SID=YOUR TWILIO Account_SID
   TWILIO_AUTH_TOKEN=YOUR TWILIO AUTH_TOKEN
   TWILIO_NUMBER=YOUR TWILIO NUMBER +1XXXXXXXXXX
+  TWILIO_USERNAME=The username you want to get all the goals through Twilio inbound messages
 ```
 
 ---
@@ -92,7 +105,7 @@
 
 ## Frontend Design
 
----
+## [FRONTEND README](https://github.com/Ronihe/phoenix-hope/tree/master/frontend)
 
 ## Todo for the application
 

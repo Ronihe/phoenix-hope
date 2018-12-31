@@ -54,7 +54,7 @@ async function seedData() {
     const hashedPassword = await bcrypt.hash('secret', BCRYPT_WORK_FACTOR);
     const user = await db.query(
       `INSERT INTO users (username, password, first_name, last_name, email, phone)
-                  VALUES ('test', $1, 'roni', 'h', 'rh@abc.com', '+12672553439')`,
+                  VALUES ('test', $1, 'roni', 'h', 'rh@abc.com', '2672553439')`,
       [hashedPassword]
     );
     const goals = await db.query(`
