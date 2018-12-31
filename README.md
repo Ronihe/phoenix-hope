@@ -30,6 +30,14 @@
 
 #### If you don't have one, you can get a free a [Twilio phone number](https://www.twilio.com/console/phone-numbers/search)
 
+#### Create .env file and ddd your twilio account info in it as below
+
+```
+  TWILIO_ACCOUNT_SID=AC32103116449f6035bc7707ebb464934f
+  TWILIO_AUTH_TOKEN=d3c28f773a6a3fd8bccdffc264096924
+  TWILIO_NUMBER=+14158517471
+```
+
 ---
 
 ## Backend Design
@@ -90,5 +98,6 @@
 
 - Data validation from server side by adding json schema
 - Error handling at server side
+- add the frontend page when you vist the website you can see the ten most created goals
 
 ---
