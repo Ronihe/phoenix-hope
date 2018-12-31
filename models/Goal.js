@@ -20,6 +20,8 @@ class Goal {
     // check if the user exists
     const user = await User.findOne(username);
     const phone = user.phone;
+    console.log(user);
+    console.log(phone);
 
     const result = await db.query(
       `INSERT INTO goals (username, title, description, due_date, category) VALUES ($1, $2, $3, $4, $5) RETURNING *`,

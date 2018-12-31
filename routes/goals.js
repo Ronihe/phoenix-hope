@@ -72,6 +72,7 @@ router.patch('/:username/:id', ensureCorrectUser, async function(
     );
     return res.json({ goal });
   } catch (error) {
+    console.log(error);
     return next(error);
   }
 });

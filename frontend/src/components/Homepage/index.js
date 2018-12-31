@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import 'antd/dist/antd.css';
-import CollectionsPage from '../../containers/GoalFormContainer';
-import { Row, Col } from 'antd';
+import GoalForm from '../../containers/GoalFormContainer';
+import { Row, Col, Button } from 'antd';
 import Goals from '../Goals';
 import styled from 'styled-components';
 
@@ -13,14 +13,19 @@ const Wrapper = styled.div`
 `;
 
 const H1 = styled.h1`
+  float: left;
+  display: inline-block;
   color: darkgray;
+`;
+
+const InlineWrapper = styled.div`
+  float: right;
 `;
 export default class Homepage extends Component {
   state = { loading: true, redirect: false };
 
   async componentDidMount() {
     await this.props.fetchCurrentUser();
-    console.log(this.props.currentUser);
   }
 
   render() {
@@ -30,7 +35,14 @@ export default class Homepage extends Component {
 
     return (
       <Wrapper>
-        <H1>Goals</H1>
+        <Row>
+          <Col>
+            <H1>Goals</H1>
+            <InlineWrapper>
+              <Button onClick={this.props.logout}>Logout</Button>
+            </InlineWrapper>
+          </Col>
+        </Row>
         <Row>
           <Col>
             <Goals goals={this.props.currentUser.goals} />
@@ -38,7 +50,7 @@ export default class Homepage extends Component {
         </Row>
         <Row type="flex" justify="center">
           <Col>
-            <CollectionsPage />
+            <GoalForm />
           </Col>
         </Row>
       </Wrapper>

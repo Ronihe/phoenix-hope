@@ -16,8 +16,7 @@ const sendingNum = TWILIO.sendingNumber;
 class Twilio {
   //send a message
   static async sendMsg(msg, phone) {
-    console.log(phone);
-    const receivingNum = '+1' + phone;
+    const receivingNum = phone;
     console.log(receivingNum);
     const message = await client.messages.create({
       body: msg,

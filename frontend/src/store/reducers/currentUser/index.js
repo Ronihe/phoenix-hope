@@ -19,6 +19,17 @@ export default function currentUser(state = DEFAULT_STATE, action) {
       return { ...state, ...action.user, password: '' };
     case t.CREATE_GOAL_SUCCESS:
       return { ...state, goals: [...state.goals, action.goal] };
+    case t.EDIT_GOAL_SUCCESS:
+      return {
+        ...state,
+        goals: state.goals.map((goal, idx) => {
+          if (goal.id === action.goal.id) {
+            return action.goal;
+          } else {
+            return goal;
+          }
+        })
+      };
     default:
       return state;
   }

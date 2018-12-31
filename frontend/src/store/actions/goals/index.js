@@ -14,7 +14,6 @@ export function createGoalRequest(payload) {
         _token: token
       });
       // dispatch the success action creator and the jobs that we got back
-      console.log(goal);
       dispatch(createGoalSuccess(goal));
     } catch (error) {
       dispatch(createGoalFail(error));
@@ -29,4 +28,36 @@ export function createGoalSuccess(goal) {
 
 export function createGoalFail(error) {
   return { type: t.CREATE_GOAL_FAIL, error };
+}
+
+export function editGoalRequest(id, payload) {
+  return async dispatch => {
+    try {
+      dispatch({ type: t.EDIT_GOAL_REQUEST });
+      let token = getToken();
+      let decoded = jwtDecode(token);
+      let goal = await callAPI(
+        'patch',
+        `/goals/${decoded.username}/${id}`,
+        true,
+        {
+          ...payload,
+          _token: token
+        }
+      );
+      // dispatch the success action creator and the jobs that we got back
+      dispatch(editGoalSuccess(goal));
+    } catch (error) {
+      dispatch(editGoalFail(error));
+      return Promise.reject();
+    }
+  };
+}
+
+export function editGoalSuccess(goal) {
+  return { type: t.EDIT_GOAL_SUCCESS, goal: goal.goal };
+}
+
+export function editGoalFail(error) {
+  return { type: t.EDIT_GOAL_FAIL, error };
 }
