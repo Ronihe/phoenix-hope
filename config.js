@@ -23,6 +23,7 @@ if (process.env.NODE_ENV === 'test') {
 TWILIO.accountSid = process.env.TWILIO_ACCOUNT_SID;
 TWILIO.authToken = process.env.TWILIO_AUTH_TOKEN;
 TWILIO.sendingNumber = process.env.TWILIO_NUMBER;
+TWILIO.username = process.env.TWILIO_USERNAME;
 
 //ensure the .env has all the TWILIO account info
 const requiredConfig = [

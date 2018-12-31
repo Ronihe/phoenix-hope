@@ -3,8 +3,14 @@
 const db = require('../db');
 const bcrypt = require('bcrypt');
 const APIError = require('../helpers/APIError');
+
 const sqlPartialUpdate = require('../helpers/partialUpdateSql');
 // helper function to do the sql
+
+const { TWILIO } = require('../config');
+const accountSid = TWILIO.accountSid;
+const authToken = TWILIO.authToken;
+const client = require('twilio')(accountSid, authToken);
 
 const BCRYPT_WORK_FACTOR = 12;
 
@@ -52,6 +58,19 @@ class User {
       );
     }
 
+    // verify the twilio phone number
+    const checkDuplicatePhone = await db.query(
+      `SELECT phone from users WHERE phone = $1`,
+      [data.phone]
+    );
+    if (checkDuplicatePhone.rows.length === 0) {
+      const validatedNum = '+1' + data.phone;
+      await client.validationRequests.create({
+        friendlyName: `${data.username}`,
+        phoneNumber: validatedNum
+      });
+    }
+
     const hashedPw = await bcrypt.hash(data.password, BCRYPT_WORK_FACTOR);
     const result = await db.query(
       `INSERT INTO users (username, password, first_name, last_name, email, phone, photo_url) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
@@ -65,6 +84,7 @@ class User {
         data.photo_url
       ]
     );
+
     return result.rows[0];
   }
 
@@ -97,6 +117,16 @@ class User {
       user.goals = [];
     } else {
       user.goals = userGoalsRes.rows;
+
+    for (let goal of user.goals) {
+      const goalStepRes = await db.query(
+        `SELECT s.id, s.goal_id, s.step_content, s.date_posted 
+        FROM steps AS s
+          JOIN goals AS g ON g.id = s.goal_id
+        WHERE g.id = $1`,
+        [goal.id]
+      );
+      goal.steps = goalStepRes.rows;
     }
 
     return user;
