@@ -29,17 +29,17 @@ class Goal {
     );
     const newGoal = result.rows[0];
 
-    // notify the user that their due is approaching the next day
     const hours = (newGoal.due_date - newGoal.date_posted) / 3600000 - 24;
-    await Twilio.sendMsg(
-      `Congrats!, ${username}! you created a new goal ${newGoal.title}!`,
-      phone
-    );
+    // await Twilio.sendMsg(
+    //   `Congrats!, ${username}! you created a new goal ${newGoal.title}!`,
+    //   phone
+    // );
     await Twilio.setDailyReminder(
       `Don't forget your ${newGoal.title}, keep the hardwork!`,
       hours,
       phone
     );
+    // notify the user that their due is approaching the next day
     await Twilio.sendDueMsg(
       `Your ${newGoal.title} is due on ${
         newGoal.due_date

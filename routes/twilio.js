@@ -15,6 +15,7 @@ router.post('/', async (req, res, next) => {
   // const tokenStr = req.body._token;
   // const token = jwt.verify(tokenStr, SECRET);
   // const username = token.username;
+  console.log(req);
   const user = await User.findOne('test15');
   const goals = user.goals;
 
