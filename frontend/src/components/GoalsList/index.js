@@ -17,7 +17,7 @@ class GoalsList extends Component {
 
   render() {
     const { goals } = this.props;
-    return (
+    return goals.length ? (
       <Collapse>
         {goals.map(goal => {
           return (
@@ -35,6 +35,8 @@ class GoalsList extends Component {
           );
         })}
       </Collapse>
+    ) : (
+      <div />
     );
   }
 }

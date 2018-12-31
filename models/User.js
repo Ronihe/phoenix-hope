@@ -93,7 +93,12 @@ class User {
       `SELECT g.id, g.title, g.description, g.state, g.date_posted, g.due_date FROM users AS u LEFT JOIN goals AS g on u.username = g.username WHERE u.username = $1`,
       [username]
     );
-    user.goals = userGoalsRes.rows;
+    if (userGoalsRes.rows[0].id === null) {
+      user.goals = [];
+    } else {
+      user.goals = userGoalsRes.rows;
+    }
+
     return user;
   }
 
