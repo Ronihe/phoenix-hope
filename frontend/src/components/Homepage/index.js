@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import 'antd/dist/antd.css';
 import GoalForm from '../../containers/GoalFormContainer';
 import { Row, Col, Button } from 'antd';
-import Goals from '../Goals';
+import GoalsList from '../GoalsList';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -45,7 +45,7 @@ export default class Homepage extends Component {
         </Row>
         <Row>
           <Col>
-            <Goals goals={this.props.currentUser.goals} />
+            <GoalsList goals={this.props.currentUser.goals} />
           </Col>
         </Row>
         <Row type="flex" justify="center">
