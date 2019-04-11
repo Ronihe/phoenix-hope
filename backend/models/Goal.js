@@ -131,8 +131,8 @@ class Goal {
     const supportRes = await db.query(
       `SELECT supporter_username FROM supports WHERE goal_id = ${goal_id}`
     );
-    console.log(supportRes.rows[0].username, username);
-    if (supportRes.rows[0].username === username) {
+    const supporters = supportRes.rows.map(a => a.supporter_username);
+    if (supporters.includes(username)) {
       throw new APIError(
         409,
         `user ${username} already supported this goal ${goal_id}`

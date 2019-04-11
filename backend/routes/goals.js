@@ -17,8 +17,8 @@ router.get(`/`, async function(req, res, next) {
     return next(erro);
   }
 });
-// support a goal
 
+// support a goal
 router.post('/:id/support', authRequired, async function(req, res, next) {
   try {
     const tokenStr = req.body._token;

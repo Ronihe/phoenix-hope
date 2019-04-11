@@ -7,7 +7,7 @@ import GoalsList from '../GoalsList';
 import styled from 'styled-components';
 
 const Container = styled.div`
-  background-color: #dcdde1;
+  background-color: salmon;
   margin: 0 auto !important;
   padding: 4rem;
   margin: ${props => props.margin || '0'};
@@ -15,7 +15,7 @@ const Container = styled.div`
 `;
 
 const Wrapper = styled.div`
-  background-color: #dcdde1;
+  background-color: salmon;
   padding: 4rem;
   margin: ${props => props.margin || '0'};
 `;
@@ -23,7 +23,7 @@ const Wrapper = styled.div`
 const H1 = styled.h1`
   float: left;
   display: inline-block;
-  color: #487eb0;
+  color: navy;
 `;
 
 const Quote = styled.div`

@@ -52,7 +52,6 @@
     },
     "phone": {
       "$id": "#/properties/phone",
-      "type": "integer",
       "title": "The Phone Schema",
       "examples": [2672553439]
     },
